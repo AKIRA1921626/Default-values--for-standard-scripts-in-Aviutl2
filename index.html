@@ -33,6 +33,98 @@ pre{background:#222;color:#0f0;padding:10px;margin-bottom:6px;white-space: pre-w
 }
 .copy-btn:hover{background:#45a049;}
 .label{font-size:12px;color:#666;margin-bottom:5px;}
+
+/* 検索ボックスのスタイル */
+#searchBox {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 5px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* 消去ボタンのスタイル */
+#clearBtn {
+  display: block;
+  width: 10%;          /* 検索バーと横幅を完全に一致させて押しやすくする */
+  padding: 10px;        /* 押しやすいように上下の厚みを確保 */
+  margin: 0 0 10px 0;   /* 下にあるカテゴリ選択ボックスとの間隔 */
+  background: #9e9e9e;  /* 控えめなグレー */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#clearBtn:hover {
+  background: #757575;  /* ホバー時に少し暗くしてフィードバックを返す */
+}
+
+/* ========================================================
+   特定の解説ブロック（.explain-block）内部専用のスタイル定義
+   ======================================================== */
+
+/* ブロック全体の背景をスクリプト（pre）と同じ#222にし、文字を白にする */
+details.explain-block {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 15px 0;
+  margin-top: 20px;
+  line-height: 1.6;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 開いている状態の時のsummary（見出し）のスタイル調整 */
+details.explain-block summary {
+  cursor: pointer;
+  color: #ffc107; /* 見出し文字を注意を引く明るい黄色に */
+  font-weight: bold;
+}
+
+/* ブロック内の .params 領域の背景を同化させる */
+details.explain-block .params {
+  background: #EEEEEE;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* コード表示（.code）をスクリプト出力（pre内の0f0）の見た目に偽装する */
+details.explain-block .code {
+  display: block;
+  background: #1a1a1a; /* 少し深めの黒背景 */
+  color: #00ff00;      /* 緑色の文字色 */
+  font-family: monospace;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  margin: 5px 0;
+}
+
+/* 解説ブロック内のコード外枠コンテナ */
+details.explain-block div[style*="position:relative"] {
+  display: flex;
+  align-items: center;
+}
+
+/* コード表示本体の横幅を、ボタンを避けるために少し調整（右側に余白を作る） */
+details.explain-block .code {
+  display: block;
+  width: 100%;
+  background: #1a1a1a;
+  color: #00ff00;
+  font-family: monospace;
+  padding: 10px 80px 10px 10px; /* 右側にボタンを置くための余白(80px)を確保 */
+  border-radius: 4px;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 </style>
 </head>
 <body>
@@ -45,39 +137,17 @@ AIに頼って作成しました。<br/><br/>
 
 ここのデータは AviUtl2 beta47 で作成したエイリアスファイルをもとにしています。<br/><br/>
 
-<details>
-<summary>各種obj.effect()のコードは初期値を再現するため、初期値で未指定の項目についてはあえて引数を一切与えずにスキップしています。</summary>
-	閃光<br/>
-	カテゴリ: 光効果<br/>
-	強さ = 100.0<br/>
-	min:0.0 / max:100.0<br/>
-	X = 0.0<br/>
-	min:-2000.0 / max:2000.0<br/>
-	Y = 0.0<br/>
-	min:-2000.0 / max:2000.0<br/>
-	<span class="type-select">合成モード = 前方に合成<br/>
-	options:[前方に合成,後方に合成,光成分のみ]</span><br/>
-	<span class="type-color">光色 =<br/>
-	type: color</span><br/>
-	<span class="type-check">サイズ固定 = 0<br/>
-	type: check</span><br/><br/>
-	obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","サイズ固定",0)<br/><br/>
-	ここでは初期値の光色が未指定のため、そこの引数指定を行っていない。<br/>
-	これでもエフェクトは機能します。<br/><br/>
-	引数を指定した場合:<br/>
-	obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","光色","ffffff","サイズ固定",0)
-</details><br/>
-
 ■パラメータタイプ別文字色<br/>
 <span class="type-normal">normal (黒)</span> / 
 <span class="type-check">check (赤)</span> / 
 <span class="type-select">select (青)</span> / 
 <span class="type-path">path (黄)</span> / 
 <span class="type-color">color (橙)</span> / 
-<span class="type-value">value (紫)</span><br/><br/>
+<span class="type-value">value (紫)</span><br/>
 
-<details>
-<summary>別文字色詳細</summary>
+<details class="explain-block">
+<summary>パラメータタイプ別文字色詳細</summary>
+  <div class="params">
 <span class="type-normal">normal (黒)<br/>
 	トラックバーで操作可能な数値。最小値と最大値を記載。</span><br/><br/>
 <span class="type-check">check (赤)<br/>
@@ -93,8 +163,41 @@ AIに頼って作成しました。<br/><br/>
 <span class="type-color">color (橙)<br/>
 	色設定項目となり、「カラーコード（文字列）」 or 「16進数リテラル」で指定。</span><br/><br/>
 <span class="type-value">value (紫)<br/>
-	変数項目となり、キーボードでー数値などを自身で入力。</span><br/>
-</details><br/>
+	変数項目となり、キーボードでー数値などを自身で入力。</span>
+	</div>
+</details>
+
+<details class="explain-block">
+  <summary>各種obj.effect()のコードは初期値を再現するため、<br/>初期値で未指定の項目についてはあえて引数を一切与えずにスキップしています。</summary>
+
+  <span class="name">閃光</span><br/>
+  <span class="category">カテゴリ: 光効果</span><br/>
+  <div class="params">
+    強さ = 100.0<br/>
+    min:0.0 / max:100.0<br/>
+    X = 0.0<br/>
+    min:-2000.0 / max:2000.0<br/>
+    Y = 0.0<br/>
+    min:-2000.0 / max:2000.0<br/>
+    <span class="type-select">合成モード = 前方に合成<br/>
+    options:[前方に合成,後方に合成,光成分のみ]</span><br/>
+    <span class="type-color">光色 =<br/>
+    type: color</span><br/>
+    <span class="type-check">サイズ固定 = 0<br/>
+    type: check</span><br/>
+  </div>
+ <div style="position:relative; margin: 5px 0 15px 0;">
+ 	<span class="code">obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","サイズ固定",0)</span>
+</div>
+  ここでは初期値の光色が未指定のため、そこの引数指定を行っていない。<br/>
+  これでもエフェクトは機能します。<br/><br/>
+  引数を指定した場合:<br/>
+  
+  <div style="position:relative; margin: 5px 0 5px 0;">
+  <span class="code">obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","光色","ffffff","サイズ固定",0)</span>
+</div>
+</details>
+
 	当サイトのデータ、及び、htmlファイルなどは二次配布、改変共にご自由に行ってください。<br/>
 	事前、及び、事後の連絡は不要となります。（禁止ということではありません。）<br/><br/>
 	
@@ -103,12 +206,32 @@ AIに頼って作成しました。<br/><br/>
 </div>
 
 <input id="searchBox" placeholder="検索"/>
+<button id="clearBtn" type="button">消去</button>
+
+
 <select id="categorySelect"><option value="">全カテゴリ</option></select>
 <div id="app"></div>
 </div>
 <script>
 function copyText(btn){
  const pre = btn.previousElementSibling;
+ if (pre && pre.tagName === "PRE") {
+  let text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+   btn.innerText="コピー済";
+   btn.style.background="#388E3C";
+   setTimeout(()=>{
+    btn.innerText="コピー";
+    btn.style.background="#4CAF50";
+   },1000);
+  }).catch(err => {
+   console.error("コピーに失敗しました: ", err);
+  });
+ }
+}
+
+function copyText(btn){
+  const code = btn.previousElementSibling.innerText;
  if (pre && pre.tagName === "PRE") {
   let text = pre.innerText;
   navigator.clipboard.writeText(text).then(() => {
@@ -292,6 +415,18 @@ function render(){
 document.getElementById("searchBox").addEventListener("input",render);
 sel.addEventListener("change",render);
 render();
+
+// 消去ボタンの要素を取得
+const clearBtn = document.getElementById("clearBtn");
+const searchBox = document.getElementById("searchBox");
+
+// クリック時の処理
+clearBtn.addEventListener("click", () => {
+  searchBox.value = ""; // テキストボックスを空にする
+  render();             // 空にした状態でリストを再描画する
+  searchBox.focus();    // オプション：消去後にテキストボックスにフォーカスを戻す
+});
+
 </script>
 </body>
 </html>
