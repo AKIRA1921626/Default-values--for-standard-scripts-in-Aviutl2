@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>AviUtl2 エフェクト一覧</title>
+<style>
+body{font-family:sans-serif;background:#f5f5f5;}
+.container{width:1000px;margin:auto;}
+.card{background:#fff;padding:16px;margin:15px 0;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.notice{background:#fff3cd;padding:15px;border-radius:8px;margin-top:20px;line-height:1.6;}
+.params{background:#eee;padding:10px;border-radius:5px;}
+.param-row{margin-bottom:6px;font-family:monospace;font-weight:bold;}
+pre{background:#222;color:#0f0;padding:10px;margin-bottom:6px;white-space: pre-wrap; word-break: break-all;}
+#searchBox,#categorySelect{width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
+
+/* タイプ別の文字色定義 */
+.type-normal { color: #333333; }
+.type-check { color: #d9534f; }
+.type-select { color: #0275d8; }
+.type-path { color: #b58100; } /* 視認性を考慮した濃い黄色 */
+.type-color { color: #f47c3c; }
+.type-value { color: #7952b3; }
+
+.copy-btn{
+ background:#4CAF50;
+ color:#fff;
+ border:none;
+ padding:6px 12px;
+ border-radius:5px;
+ cursor:pointer;
+ display:block;
+ margin-top:6px;
+}
+.copy-btn:hover{background:#45a049;}
+.label{font-size:12px;color:#666;margin-bottom:5px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>AviUtl2 エフェクト一覧</h1>
+<div class="notice">
+このページはAviUtl2の標準エフェクトの初期値を調べたものです。<br/>
+AIに頼って作成しました。<br/><br/>
+製作者の方でデータの裏取りは行い問題ないことを確認しましたが、見落とされたAIによるハルシネーションや誤記が含まれる可能性があるため、最終確認はご自身で行ってください。<br/><br/>
+
+ここのデータは AviUtl2 beta47 で作成したエイリアスファイルをもとにしています。<br/><br/>
+
+<details>
+<summary>各種obj.effect()のコードは初期値を再現するため、初期値で未指定の項目についてはあえて引数を一切与えずにスキップしています。</summary>
+	閃光<br/>
+	カテゴリ: 光効果<br/>
+	強さ = 100.0<br/>
+	min:0.0 / max:100.0<br/>
+	X = 0.0<br/>
+	min:-2000.0 / max:2000.0<br/>
+	Y = 0.0<br/>
+	min:-2000.0 / max:2000.0<br/>
+	<span class="type-select">合成モード = 前方に合成<br/>
+	options:[前方に合成,後方に合成,光成分のみ]</span><br/>
+	<span class="type-color">光色 =<br/>
+	type: color</span><br/>
+	<span class="type-check">サイズ固定 = 0<br/>
+	type: check</span><br/><br/>
+	obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","サイズ固定",0)<br/><br/>
+	ここでは初期値の光色が未指定のため、そこの引数指定を行っていない。<br/>
+	これでもエフェクトは機能します。<br/><br/>
+	引数を指定した場合:<br/>
+	obj.effect("閃光","強さ",100.0,"X",0.0,"Y",0.0,"合成モード","前方に合成","光色","ffffff","サイズ固定",0)
+</details><br/>
+
+■パラメータタイプ別文字色<br/>
+<span class="type-normal">normal (黒)</span> / 
+<span class="type-check">check (赤)</span> / 
+<span class="type-select">select (青)</span> / 
+<span class="type-path">path (黄)</span> / 
+<span class="type-color">color (橙)</span> / 
+<span class="type-value">value (紫)</span><br/><br/>
+
+<details>
+<summary>別文字色詳細</summary>
+<span class="type-normal">normal (黒)<br/>
+	トラックバーで操作可能な数値。最小値と最大値を記載。</span><br/><br/>
+<span class="type-check">check (赤)<br/>
+	チェックボックスで、(1 or 0) or (true or false) を選択可能。</span><br/><br/>
+<span class="type-select">select (青)<br/>
+	リスト選択項目で選択可能な数値。選択肢を記載。</span><br/><br/>
+<span class="type-path">path (黄)<br/>
+	各種パスや参照先を指定でき、4つの項目から選べる。<br/>
+	画像ファイルから選択([AnyPath])<br/>
+	動画ファイルから選択([AnyPath])<br/>
+	シーン(Scene[N])<br/>
+	仮想バッファ(*tempbuffer)</span><br/><br/>
+<span class="type-color">color (橙)<br/>
+	色設定項目となり、「カラーコード（文字列）」 or 「16進数リテラル」で指定。</span><br/><br/>
+<span class="type-value">value (紫)<br/>
+	変数項目となり、キーボードでー数値などを自身で入力。</span><br/>
+</details><br/>
+	当サイトのデータなどは二次配布、改変共にご自由に行ってください。<br/>
+	事前、及び、事後の連絡は不要となります。（禁止ということではありません。）<br/><br/>
+	
+	<a href="https://x.com/AKIRA1921626">製作者のSNS</a><br/><br/>
+	<a href="https://spring-fragrance.mints.ne.jp/aviutl/">AviUtlのお部屋</a>
+</div>
+
+<input id="searchBox" placeholder="検索"/>
+<select id="categorySelect"><option value="">全カテゴリ</option></select>
+<div id="app"></div>
+</div>
+<script>
+function copyText(btn){
+ const pre = btn.previousElementSibling;
+ if (pre && pre.tagName === "PRE") {
+  let text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+   btn.innerText="コピー済";
+   btn.style.background="#388E3C";
+   setTimeout(()=>{
+    btn.innerText="コピー";
+    btn.style.background="#4CAF50";
+   },1000);
+  }).catch(err => {
+   console.error("コピーに失敗しました: ", err);
+  });
+ }
+}
+
+const effects = [
+  // === 色調整カテゴリー ===
+  {"name": "色調補正", "category": "色調整", "params": [{"name": "明るさ", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "コントラスト", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "色相", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "輝度", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "彩度", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "飽和する", "value": "1", "type": "check"}], "code": "obj.effect(\"色調補正\",\"明るさ\",100.00,\"コントラスト\",100.00,\"色相\",0.00,\"輝度\",100.00,\"彩度\",100.00,\"飽和する\",1)"}, 
+  {"name": "グラデーション", "category": "色調整", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "中心X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "角度", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "幅", "value": "100", "type": "normal", "min": "0", "max": "2000"}, {"name": "合成モード", "value": "通常", "type": "select", "options": "通常,加算,減算,乗算,スクリーン,オーバーレイ,比較(明),比較(暗),輝度,色差,陰影,明暗,差分"}, {"name": "形状", "value": "線形", "type": "select", "options": "線形,円形,矩形,凸型"}, {"name": "開始色", "value": "ffffff", "type": "color"}, {"name": "終了色", "value": " ", "type": "color"}], "code": "obj.effect(\"グラデーション\",\"強さ\",100.0,\"中心X\",0.0,\"中心Y\",0.0,\"角度\",0.00,\"幅\",100,\"合成モード\",\"通常\",\"形状\",\"線形\",\"開始色\",\"ffffff\")"}, 
+  {"name": "単色化", "category": "色調整", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "色", "value": "ffffff", "type": "color"}, {"name": "輝度を保持する", "value": "1", "type": "check"}], "code": "obj.effect(\"単色化\",\"強さ\",100.0,\"色\",\"ffffff\",\"輝度を保持する\",1)"}, 
+  {"name": "特定色域変換", "category": "色調整", "params": [{"name": "色相範囲", "value": "16", "type": "normal", "min": "0", "max": "256"}, {"name": "彩度範囲", "value": "96", "type": "normal", "min": "0", "max": "256"}, {"name": "境界補正", "value": "1", "type": "normal", "min": "0", "max": "8"}, {"name": "変換前の色", "value": " ", "type": "color"}, {"name": "変換後の色", "value": "ffffff", "type": "color"}, {"name": "色彩補正", "value": "0", "type": "check"}], "code": "obj.effect(\"特定色域変換\",\"色相範囲\",16,\"彩度範囲\",96,\"境界補正\",1,\"変換後の色\",\"ffffff\",\"色彩補正\",0)"}, 
+  {"name": "拡張色設定", "category": "色調整", "params": [{"name": "R", "value": "255", "type": "normal", "min": "0", "max": "255"},{"name": "G", "value": "255", "type": "normal", "min": "0", "max": "255"},{"name": "B", "value": "255", "type": "normal", "min": "0", "max": "255"}], "code": "obj.effect(\"拡張色変換\",\"R\",255,\"G\",255,\"B\",255)"}, 
+
+  // === クリッピングカテゴリー ===
+  {"name": "クリッピング", "category": "クリッピング", "params": [{"name": "上", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "下", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "左", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "右", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "中心の位置を変更", "value": "0", "type": "check"}], "code": "obj.effect(\"クリッピング\",\"上\",0,\"下\",0,\"左\",0,\"右\",0,\"中心の位置を変更\",0)"}, 
+  {"name": "斜めクリッピング", "category": "クリッピング", "params": [{"name": "中心X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "角度", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "ぼかし", "value": "1", "type": "normal", "min": "0", "max": "2000"}, {"name": "幅", "value": "0", "type": "normal", "min": "-2000", "max": "2000"}], "code": "obj.effect(\"斜めクリッピング\",\"中心X\",0.0,\"中心Y\",0.0,\"角度\",0.00,\"ぼかし\",1,\"幅\",0)"}, 
+  {"name": "扇クリッピング", "category": "クリッピング", "params": [{"name": "中心X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "基準角", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "範囲角", "value": "90.00", "type": "normal", "min": "-360.00", "max": "360.00"}, {"name": "ぼかし", "value": "1", "type": "normal", "min": "0", "max": "2000"}, {"name": "基準角を中央にする", "value": "0", "type": "check"}], "code": "obj.effect(\"扇クリッピング\",\"中心X\",0.0,\"中心Y\",0.0,\"基準角\",0.00,\"範囲角\",90.00,\"ぼかし\",1,\"基準角を中央にする\",0)"}, 
+  {"name": "マスク", "category": "クリッピング", "params": [{"name": "X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "回転", "value": "0.00", "type": "normal", "min": "-360.00", "max": "360.00"}, {"name": "サイズ", "value": "100", "type": "normal", "min": "0", "max": "4000"}, {"name": "縦横比", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "ぼかし", "value": "0", "type": "normal", "min": "0", "max": "1000"}, {"name": "マスクの種類", "value": "円", "type": "select", "options": "円,四角形,三角形,五角形,六角形,星型,ハート,仮想バッファ,(ファイルから選択)"}, {"name": "マスクの反転", "value": "0", "type": "check"}, {"name": "元のサイズに合わせる", "value": "0", "type": "check"}], "code": "obj.effect(\"マスク\",\"X\",0.0,\"Y\",0.0,\"回転\",0.00,\"サイズ\",100,\"縦横比\",0.00,\"ぼかし\",0,\"マスクの種類\",\"円\",\"マスクの反転\",0,\"元のサイズに合わせる\",0)"}, 
+
+  // === ぼかしカテゴリー ===
+  {"name": "ぼかし", "category": "ぼかし", "params": [{"name": "範囲", "value": "5", "type": "normal", "min": "0", "max": "1000"}, {"name": "縦横比", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "光の強さ", "value": "0.0", "type": "normal", "min": "0.0", "max": "60.0"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"ぼかし\",\"範囲\",5,\"縦横比\",0.00,\"光の強さ\",0.0,\"サイズ固定\",0)"}, 
+  {"name": "レンズブラー", "category": "ぼかし", "params": [{"name": "範囲", "value": "5", "type": "normal", "min": "0", "max": "1000"}, {"name": "光の強さ", "value": "32.0", "type": "normal", "min": "0.0", "max": "60.0"}, {"name": "形状", "value": "円", "type": "select", "options": "円,四角形,三角形,五角形,六角形,星型,ハート"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"レンズブラー\",\"範囲\",5,\"光の強さ\",32.0,\"形状\",\"円\",\"サイズ固定\",0)"}, 
+  {"name": "放射ブラー", "category": "ぼかし", "params": [{"name": "範囲", "value": "20.00", "type": "normal", "min": "0.00", "max": "80.00"}, {"name": "X", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "Y", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"放射ブラー\",\"範囲\",20.00,\"X\",0.0,\"Y\",0.0,\"サイズ固定\",0)"}, 
+  {"name": "方向ブラー", "category": "ぼかし", "params": [{"name": "範囲", "value": "20", "type": "normal", "min": "0", "max": "1000"}, {"name": "角度", "value": "50.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"方向ブラー\",\"範囲\",20,\"角度\",50.00,\"サイズ固定\",0)"}, 
+  {"name": "モーションブラー", "category": "ぼかし", "params": [{"name": "間隔", "value": "1.00", "type": "normal", "min": "0.00", "max": "100.00"}, {"name": "分解能", "value": "10", "type": "normal", "min": "1", "max": "100"}, {"name": "残像", "value": "0", "type": "check"}], "code": "obj.effect(\"モーションブラー\",\"間隔\",1.00,\"分解能\",10,\"残像\",0)"}, 
+  {"name": "境界ぼかし", "category": "ぼかし", "params": [{"name": "範囲", "value": "5", "type": "normal", "min": "0", "max": "1000"}, {"name": "縦横比", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "透明度の境界をぼかす", "value": "0", "type": "check"}], "code": "obj.effect(\"境界ぼかし\",\"範囲\",5,\"縦横比\",0.00,\"透明度の境界をぼかす\",0)"}, 
+
+  // === 光効果カテゴリー ===
+  {"name": "グロー", "category": "光効果", "params": [{"name": "強さ", "value": "40.00", "type": "normal", "min": "0.00", "max": "100.00"}, {"name": "拡散", "value": "50", "type": "normal", "min": "0", "max": "500"}, {"name": "角度", "value": "25.00", "type": "normal", "min": "-360.00", "max": "360.00"}, {"name": "しきい値", "value": "80.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "比率", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "ぼかし", "value": "1", "type": "normal", "min": "0", "max": "50"}, {"name": "形状", "value": "クロス(4本)", "type": "select", "options": "通常,クロス(4本),クロス(4本),クロス(6本),クロス(8本),クロス(10本),クロス(12本),ライン"}, {"name": "光色", "value": " ", "type": "color"},{"name": "光成分のみ", "value": "0", "type": "check"},{"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"グロー\",\"強さ\",40.00,\"拡散\",50,\"角度\",25.00,\"しきい値\",80.0,\"比率\",100.0,\"ぼかし\",1,\"形状\",\"クロス(4本)\",\"光成分のみ\",0,\"サイズ固定\",0)"}, 
+  {"name": "発光", "category": "光効果", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "400.0"}, {"name": "拡散", "value": "250", "type": "normal", "min": "0", "max": "1000"}, {"name": "しきい値", "value": "80.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "拡散速度", "value": "0", "type": "normal", "min": "-1000", "max": "1000"}, {"name": "光色", "value": " ", "type": "color"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"発光\",\"強さ\",100.0,\"拡散\",250,\"しきい値\",80.0,\"拡散速度\",0,\"サイズ固定\",0)"}, 
+  {"name": "閃光", "category": "光効果", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "X", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "Y", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "合成モード", "value": "前方に合成", "type": "select", "options": "前方に合成,後方に合成,光成分のみ"}, {"name": "光色", "value": " ", "type": "color"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"閃光\",\"強さ\",100.0,\"X\",0.0,\"Y\",0.0,\"合成モード\",\"前方に合成\",\"サイズ固定\",0)"}, 
+  {"name": "拡散光", "category": "光効果", "params": [{"name": "強さ", "value": "50.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "拡散", "value": "12", "type": "normal", "min": "0", "max": "500"}, {"name": "サイズ固定", "value": "0", "type": "check"}], "code": "obj.effect(\"拡散光\",\"強さ\",50.0,\"拡散\",12,\"サイズ固定\",0)"}, 
+  {"name": "ライト", "category": "光効果", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "300.0"}, {"name": "拡散", "value": "25", "type": "normal", "min": "0", "max": "500"}, {"name": "比率", "value": "0.0", "type": "normal", "min": "-100.0", "max": "100.0"}, {"name": "逆光", "value": "0", "type": "check"}, {"name": "色", "value": "ffffff", "type": "color"}], "code": "obj.effect(\"ライト\",\"強さ\",100.0,\"拡散\",25,\"比率\",0.0,\"逆光\",0,\"色\",\"ffffff\")"}, 
+  {"name": "色ずれ", "category": "光効果", "params": [{"name": "ずれ幅", "value": "5.0", "type": "normal", "min": "0.0", "max": "2000.0"}, {"name": "角度", "value": "90.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "強さ", "value": "100", "type": "normal", "min": "0", "max": "100"}, {"name": "色ずれの種類", "value": "赤緑A", "type": "select", "options": "赤緑A,赤青A,緑青A,赤緑B,赤青B,緑青B"}], "code": "obj.effect(\"色ずれ\",\"ずれ幅\",5.0,\"角度\",90.00,\"強さ\",100,\"色ずれの種類\",\"赤緑A\")"}, 
+
+  // === 装飾カテゴリー ===
+  {"name": "縁取り", "category": "装飾", "params": [{"name": "サイズ", "value": "5", "type": "normal", "min": "0", "max": "500"}, {"name": "ぼかし", "value": "5", "type": "normal", "min": "0", "max": "100"}, {"name": "縁色", "value": "ffffff", "type": "color"}, {"name": "パターン画像", "value": " ", "type": "path"}], "code": "obj.effect(\"縁取り\",\"サイズ\",5,\"ぼかし\",5,\"縁色\",\"ffffff\")"}, 
+  {"name": "枠線", "category": "装飾", "params": [{"name": "X", "value": "0", "type": "normal", "min": "-2000", "max": "2000"}, {"name": "Y", "value": "0", "type": "normal", "min": "-2000", "max": "1000"}, {"name": "サイズ", "value": "10", "type": "normal", "min": "0", "max": "1000"}, {"name": "丸み", "value": "0", "type": "normal", "min": "0", "max": "1000"}, {"name": "枠色", "value": "ffffff", "type": "color"}, {"name": "パターン画像", "value": " ", "type": "path"}], "code": "obj.effect(\"枠線\",\"X\",0,\"Y\",0,\"サイズ\",10,\"丸み\",0,\"枠色\",\"ffffff\")"}, 
+  {"name": "ドロップシャドウ", "category": "装飾", "params": [{"name": "X", "value": "-40", "type": "normal", "min": "-1000", "max": "1000"}, {"name": "Y", "value": "24", "type": "normal", "min": "-1000", "max": "1000"}, {"name": "濃さ", "value": "40.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "拡散", "value": "10", "type": "normal", "min": "0", "max": "500"}, {"name": "影色", "value": "000000", "type": "color"}, {"name": "影を別オブジェクトで描画", "value": "0", "type": "check"}], "code": "obj.effect(\"ドロップシャドウ\",\"X\",-40,\"Y\",24,\"濃さ\",40.0,\"拡散\",10,\"影色\",\"000000\",\"影を別オブジェクトで描画\",0)"}, 
+  {"name": "凸エッジ", "category": "装飾", "params": [{"name": "幅", "value": "4", "type": "normal", "min": "0", "max": "100"}, {"name": "高さ", "value": "1.00", "type": "normal", "min": "0.00", "max": "3.00"}, {"name": "角度", "value": "45.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}], "code": "obj.effect(\"凸エッジ\",\"幅\",4,\"高さ\",1.00,\"角度\",45.00)"}, 
+
+  // === 抽出カテゴリー ===
+  {"name": "クロマキー", "category": "抽出", "params": [{"name": "色相範囲", "value": "16", "type": "normal", "min": "0", "max": "256"}, {"name": "彩度範囲", "value": "96", "type": "normal", "min": "0", "max": "256"}, {"name": "境界補正", "value": "1", "type": "normal", "min": "0", "max": "8"}, {"name": "基準色", "value": " ", "type": "color"}, {"name": "色彩補正", "value": "0", "type": "check"}, {"name": "透過補正", "value": "0", "type": "check"}], "code": "obj.effect(\"クロマキー\",\"色相範囲\",16,\"彩度範囲\",96,\"境界補正\",1,\"色彩補正\",0,\"透過補正\",0)"}, 
+  {"name": "ルミナンスキー", "category": "抽出", "params": [{"name": "基準輝度", "value": "2048", "type": "normal", "min": "-4096", "max": "8192"}, {"name": "輝度範囲", "value": "512", "type": "normal", "min": "0", "max": "4096"}, {"name": "モード", "value": "暗い部分を透過", "type": "select", "options": "暗い部分を透過,明るい部分を透過,明暗部分を透過,明暗部分を透過(補完なし),基準部分を透過,基準部分を透過(補完なし)"}], "code": "obj.effect(\"ルミナンスキー\",\"基準輝度\",2048,\"輝度範囲\",512,\"モード\",\"暗い部分を透過\")"}, 
+  {"name": "カラーキー", "category": "抽出", "params": [{"name": "輝度範囲", "value": "400", "type": "normal", "min": "0", "max": "4096"}, {"name": "色差範囲", "value": "400", "type": "normal", "min": "0", "max": "4096"}, {"name": "境界補正", "value": "1", "type": "normal", "min": "0", "max": "80"}, {"name": "基準色", "value": " ", "type": "color"}], "code": "obj.effect(\"カラーキー\",\"輝度範囲\",400,\"色差範囲\",400,\"境界補正\",1)"}, 
+  {"name": "エッジ抽出", "category": "抽出", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "しきい値", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "色", "value": "ffffff", "type": "color"}, {"name": "輝度エッジを抽出", "value": "1", "type": "check"}, {"name": "透明度エッジを抽出", "value": "0", "type": "check"}], "code": "obj.effect(\"エッジ抽出\",\"強さ\",100.0,\"しきい値\",0.00,\"色\",\"ffffff\",\"輝度エッジを抽出\",1,\"透明度エッジを抽出\",0)"}, 
+
+  // === 変形カテゴリー ===
+  {"name": "波紋", "category": "変形", "params": [{"name": "中心X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "幅", "value": "30.0", "type": "normal", "min": "1.0", "max": "400.0"}, {"name": "高さ", "value": "15.0", "type": "normal", "min": "-400.0", "max": "400.0"}, {"name": "速度", "value": "150.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "波紋数", "value": "0", "type": "normal", "min": "0", "max": "100"}, {"name": "波紋間隔", "value": "0", "type": "normal", "min": "0", "max": "100"}, {"name": "増幅減衰回数", "value": "0", "type": "normal", "min": "-100", "max": "100"}], "code": "obj.effect(\"波紋\",\"中心X\",0.0,\"中心Y\",0.0,\"幅\",30.0,\"高さ\",15.0,\"速度\",150.0,\"波紋数\",0,\"波紋間隔\",0,\"増幅減衰回数\",0)"}, 
+  {"name": "ラスター", "category": "変形", "params": [{"name": "横幅", "value": "100", "type": "normal", "min": "0", "max": "2000"}, {"name": "高さ", "value": "100", "type": "normal", "min": "0", "max": "2000"}, {"name": "周期", "value": "1.00", "type": "normal", "min": "-40.00", "max": "40.00"}, {"name": "縦ラスター", "value": "0", "type": "check"}, {"name": "ランダム振幅", "value": "0", "type": "check"}], "code": "obj.effect(\"ラスター\",\"横幅\",100,\"高さ\",100,\"周期\",1.00,\"縦ラスター\",0,\"ランダム振幅\",0)"}, 
+  {"name": "極座標変換", "category": "変形", "params": [{"name": "中心幅", "value": "0", "type": "normal", "min": "0", "max": "2000"}, {"name": "拡大率", "value": "100.00", "type": "normal", "min": "100.00", "max": "800.00"}, {"name": "回転", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "渦巻", "value": "0.000", "type": "normal", "min": "-8.000", "max": "8.000"}], "code": "obj.effect(\"極座標変換\",\"中心幅\",0,\"拡大率\",100.00,\"回転\",0.00,\"渦巻\",0.000)"}, 
+  {"name": "ディスプレイスメントマップ", "category": "変形", "params": [{"name": "X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "回転", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "サイズ", "value": "200", "type": "normal", "min": "0", "max": "4000"}, {"name": "縦横比", "value": "0.000", "type": "normal", "min": "-100.000", "max": "100.000"}, {"name": "ぼかし", "value": "5", "type": "normal", "min": "0", "max": "1000"}, {"name": "変形X", "value": "0.00", "type": "normal", "min": "-5000.00", "max": "5000.00"}, {"name": "変形Y", "value": "0.00", "type": "normal", "min": "-5000.00", "max": "5000.00"}, {"name": "変形方法", "value": "移動変形", "type": "select", "options": "移動変形,拡大変形,回転変形"}, {"name": "マップの種類", "value": "円", "type": "select", "options":  "円,四角形,三角形,五角形,六角形,星型,ハート,仮想バッファ,(ファイルから選択)"}, {"name": "元のサイズに合わせる", "value": "0", "type": "check"}], "code": "obj.effect(\"ディスプレイスメントマップ\",\"X\",0.0,\"Y\",0.0,\"回転\",0.00,\"サイズ\",200,\"縦横比\",0.000,\"ぼかし\",5,\"変形X\",0.00,\"変形方法\",\"移動変形\",\"マップの種類\",\"円\",\"元のサイズに合わせる\",0)"}, 
+  {"name": "リサイズ", "category": "変形", "params": [{"name": "拡大率", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "X", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "Y", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "補間なし", "value": "0", "type": "check"}, {"name": "ピクセル数でサイズ指定", "value": "0", "type": "check"}], "code": "obj.effect(\"リサイズ\",\"拡大率\",100.000,\"X\",100.000,\"Y\",100.000,\"補間なし\",0,\"ピクセル数でサイズ指定\",0)"}, 
+  {"name": "立方体(カメラ制御)", "category": "変形", "params": [{"name": "サイズ", "value": "200.0", "type": "normal", "min": "0.0", "max": "2000.0"}], "code": "obj.effect(\"立方体(カメラ制御)\",\"サイズ\",200.0)"}, 
+  {"name": "球体(カメラ制御)", "category": "変形", "params": [{"name": "サイズ", "value": "200.0", "type": "normal", "min": "0.0", "max": "2000.0"}], "code": "obj.effect(\"球体(カメラ制御)\",\"サイズ\",200.0)"}, 
+  {"name": "簡易変形", "category": "変形", "params": [{"name": "時間経過", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "分割数", "value": "30", "type": "normal", "min": "1", "max": "100"}, {"name": "座標", "value": " ", "type": "value"}], "code": "obj.effect(\"簡易変形\",\"時間経過\",0.0,\"分割数\",30)"}, 
+  {"name": "簡易変形(カメラ制御)", "category": "変形", "params": [{"name": "時間経過", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "分割数", "value": "30", "type": "normal", "min": "1", "max": "100"}, {"name": "座標", "value": " ", "type": "value"}], "code": "obj.effect(\"簡易変形(カメラ制御)\",\"時間経過\",0.0,\"分割数\",30)"}, 
+  {"name": "万華鏡", "category": "変形", "params": [{"name": "中心X", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "長さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "2000.0"}, {"name": "回転", "value": "0.0", "type": "normal", "min": "-3600.0", "max": "3600.0"}, {"name": "角数(偶数)", "value": "6", "type": "normal", "min": "4", "max": "50"}, {"name": "繰り返し回数", "value": "2", "type": "normal", "min": "0", "max": "50"}, {"name": "固定サイズ", "value": "0.0", "type": "normal", "min": "0.0", "max": "4000.0"}, {"name": "円形マスク", "value": "0", "type": "check"}, {"name": "回転同期", "value": "0", "type": "check"}, {"name": "領域外を透過", "value": "0", "type": "check"}, {"name": "表示位置確認", "value": "0", "type": "check"}], "code": "obj.effect(\"万華鏡\",\"中心X\",0.0,\"中心Y\",0.0,\"長さ\",100.0,\"回転\",0.0,\"角数(偶数)\",6,\"繰り返し回数\",2,\"固定サイズ\",0.0,\"円形マスク\",0,\"回転同期\",0,\"領域外を透過\",0,\"表示位置確認\",0)"}, 
+  {"name": "メッシュ変形", "category": "変形", "params": [{"name": "変形率", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "横格子点", "value": "5", "type": "normal", "min": "2", "max": "20"}, {"name": "縦格子点", "value": "5", "type": "normal", "min": "2", "max": "20"}, {"name": "分割数", "value": "50", "type": "normal", "min": "1", "max": "100"}, {"name": "座標", "value": " ", "type": "value"}], "code": "obj.effect(\"メッシュ変形\",\"変形率\",100.0,\"横格子点\",5,\"縦格子点\",5,\"分割数\",50)"}, 
+
+  // === 加工カテゴリー ===
+  {"name": "画像合成", "category": "加工", "params": [{"name": "X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "拡大率", "value": "100.00", "type": "normal", "min": "0.00", "max": "800.00"}, {"name": "合成モード", "value": "色情報を上書き", "type": "select", "options": "前方から合成,後方から合成,色情報を上書き,輝度をアルファ値として上書き,輝度をアルファ値として乗算"}, {"name": "画像", "value": " ", "type": "path"}, {"name": "ループ画像", "value": "1", "type": "check"}], "code": "obj.effect(\"画像合成\",\"X\",0.0,\"Y\",0.0,\"拡大率\",100.00,\"合成モード\",\"色情報を上書き\",\"ループ画像\",1)"}, 
+  {"name": "シャープ", "category": "加工", "params": [{"name": "強さ", "value": "50.0", "type": "normal", "min": "0.0", "max": "800.0"}, {"name": "範囲", "value": "5", "type": "normal", "min": "0", "max": "100"}], "code": "obj.effect(\"シャープ\",\"強さ\",50.0,\"範囲\",5)"}, 
+  {"name": "ノイズ除去", "category": "加工", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "範囲", "value": "2", "type": "normal", "min": "1", "max": "8"}, {"name": "しきい値", "value": "20", "type": "normal", "min": "0", "max": "200"}], "code": "obj.effect(\"ノイズ除去\",\"強さ\",100.0,\"範囲\",2,\"しきい値\",20)"}, 
+  {"name": "インターレース解除", "category": "加工", "params": [{"name": "解除方法", "value": "奇数", "type": "select", "options": "偶数,二重化"}], "code": "obj.effect(\"インターレース解除\",\"解除方法\",\"奇数\")"}, 
+  {"name": "ノイズ", "category": "加工", "params": [{"name": "強さ", "value": "100.0", "type": "normal", "min": "0.0", "max": "200.0"}, {"name": "速度X", "value": "0.0", "type": "normal", "min": "-800.0", "max": "800.0"}, {"name": "速度Y", "value": "0.0", "type": "normal", "min": "-800.0", "max": "800.0"}, {"name": "変化速度", "value": "0.0", "type": "normal", "min": "0.0", "max": "800.0"}, {"name": "周期X", "value": "1.00", "type": "normal", "min": "0.00", "max": "100.00"}, {"name": "周期Y", "value": "1.00", "type": "normal", "min": "0.00", "max": "100.00"}, {"name": "しきい値", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "シード", "value": "0", "type": "normal", "min": "0", "max": "100"}, {"name": "合成モード", "value": "アルファ値と乗算", "type": "select", "options": "アルファ値と乗算,明るさと乗算"}, {"name": "ノイズの種類", "value": "Type1", "type": "select", "options": "Type1,Type2,Type3,Type4,Type5,Type6"}], "code": "obj.effect(\"ノイズ\",\"強さ\",100.0,\"速度X\",0.0,\"速度Y\",0.0,\"変化速度\",0.0,\"周期X\",1.00,\"周期Y\",1.00,\"しきい値\",0.0,\"シード\",0,\"合成モード\",\"アルファ値と乗算\",\"ノイズの種類\",\"Type1\")"}, 
+  {"name": "モザイク", "category": "加工", "params": [{"name": "サイズ", "value": "12", "type": "normal", "min": "1", "max": "2000"}, {"name": "タイル風", "value": "0", "type": "check"}], "code": "obj.effect(\"モザイク\",\"サイズ\",12,\"タイル風\",0)"}, 
+
+  // === 全カテゴリ(オフスクリーン描画) ===
+  {"name": "オフスクリーン描画", "category": "全カテゴリ(オフスクリーン描画)", "params": [], "code": "obj.effect(\"オフスクリーン描画\")"}, 
+
+  // === 配置カテゴリー ===
+  {"name": "画像ループ", "category": "配置", "params": [{"name": "横回数", "value": "1", "type": "normal", "min": "1", "max": "100"}, {"name": "縦回数", "value": "1", "type": "normal", "min": "1", "max": "100"}, {"name": "オフセットX", "value": "0.000", "type": "normal", "min": "-10000.000", "max": "10000.000"}, {"name": "オフセットY", "value": "0.000", "type": "normal", "min": "-10000.000", "max": "10000.000"}, {"name": "個別オブジェクト", "value": "0", "type": "check"}], "code": "obj.effect(\"画像ループ\",\"横回数\",1,\"縦回数\",1,\"オフセットX\",0.000,\"オフセットY\",0.000,\"個別オブジェクト\",0)"}, 
+  {"name": "オブジェクト分割", "category": "配置", "params": [{"name": "横分割数", "value": "10", "type": "normal", "min": "1", "max": "100"}, {"name": "縦分割数", "value": "10", "type": "normal", "min": "1", "max": "100"}], "code": "obj.effect(\"オブジェクト分割\",\"横分割数\",10,\"縦分割数\",10)"}, 
+  {"name": "座標の拡大縮小(個別オブジェクト)", "category": "配置", "params": [{"name": "拡大率", "value": "100.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "中心X", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}], "code": "obj.effect(\"座標の拡大縮小(個別オブジェクト)\",\"拡大率\",100.0,\"中心X\",0.0,\"中心Y\",0.0)"}, 
+  {"name": "座標の回転(個別オブジェクト)", "category": "配置", "params": [{"name": "角度", "value": "0.0", "type": "normal", "min": "-360.0", "max": "360.0"}, {"name": "中心X", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}], "code": "obj.effect(\"座標の回転(個別オブジェクト)\",\"角度\",0.0,\"中心X\",0.0,\"中心Y\",0.0)"}, 
+  {"name": "円形配置", "category": "配置", "params": [{"name": "円周", "value": "100.00", "type": "normal", "min": "0.00", "max": "800.00"}, {"name": "半径", "value": "100.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "回転", "value": "0.0", "type": "normal", "min": "-3600.0", "max": "3600.0"}, {"name": "ずらし", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "数", "value": "8", "type": "normal", "min": "1", "max": "500"}, {"name": "水平配置(カメラ制御)", "value": "0", "type": "check"}, {"name": "向き反転", "value": "0", "type": "check"}, {"name": "回転無し", "value": "0", "type": "check"}], "code": "obj.effect(\"円形配置\",\"円周\",100.00,\"半径\",100.0,\"回転\",0.0,\"ずらし\",0.0,\"数\",8,\"水平配置(カメラ制御)\",0,\"向き反転\",0,\"回転無し\",0)"}, 
+  {"name": "ランダム配置", "category": "配置", "params": [{"name": "数", "value": "50", "type": "normal", "min": "0", "max": "4000"}, {"name": "範囲", "value": "800.0", "type": "normal", "min": "0.0", "max": "20000.0"}, {"name": "回転", "value": "0.00", "type": "normal", "min": "0.00", "max": "20.00"}, {"name": "拡散", "value": "0.0", "type": "normal", "min": "0.0", "max": "20000.0"}, {"name": "3D配置(カメラ制御)", "value": "0", "type": "check"}, {"name": "ランダム角度", "value": "0", "type": "check"}, {"name": "カメラの方向を向く", "value": "0", "type": "check"}], "code": "obj.effect(\"ランダム配置\",\"数\",50,\"範囲\",800.0,\"回転\",0.00,\"拡散\",0.0,\"3D配置(カメラ制御)\",0,\"ランダム角度\",0,\"カメラの方向を向く\",0)"}, 
+  {"name": "ミラー", "category": "配置", "params": [{"name": "透明度", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "減衰", "value": "0.0", "type": "normal", "min": "0.0", "max": "500.0"}, {"name": "境目調整", "value": "0", "type": "normal", "min": "-2000", "max": "2000"}, {"name": "ミラーの方向", "value": "下側", "type": "select", "options": "上側,下側,左側,右側"}, {"name": "中心の位置を変更", "value": "0", "type": "check"}], "code": "obj.effect(\"ミラー\",\"透明度\",0.0,\"減衰\",0.0,\"境目調整\",0,\"ミラーの方向\",\"下側\",\"中心の位置を変更\",0)"}, 
+
+  // === 切り替え効果カテゴリー ===
+  {"name": "フェード", "category": "切り替え効果", "params": [{"name": "イン", "value": "0.50", "type": "normal", "min": "0.00", "max": "10.00"}, {"name": "アウト", "value": "0.50", "type": "normal", "min": "0.00", "max": "10.00"}], "code": "obj.effect(\"フェード\",\"イン\",0.50,\"アウト\",0.50)"}, 
+  {"name": "ワイプ", "category": "切り替え効果", "params": [{"name": "イン", "value": "0.50", "type": "normal", "min": "0.00", "max": "10.00"}, {"name": "アウト", "value": "0.50", "type": "normal", "min": "0.00", "max": "10.00"}, {"name": "ぼかし", "value": "2", "type": "normal", "min": "0", "max": "100"}, {"name": "ワイプの種類", "value": "ワイプ(円)", "type": "select", "options": "ワイプ(円),ワイプ(四角),ワイプ(時計),ワイプ(横),ワイプ(縦),ワイプ(星型),ワイプ(ハート)"}, {"name": "縦横比固定", "value": "1", "type": "check"}, {"name": "反転(イン)", "value": "0", "type": "check"}, {"name": "反転(アウト)", "value": "0", "type": "check"}], "code": "obj.effect(\"ワイプ\",\"イン\",0.50,\"アウト\",0.50,\"ぼかし\",2,\"ワイプの種類\",\"ワイプ(円)\",\"縦横比固定\",1,\"反転(イン)\",0,\"反転(アウト)\",0)"}, 
+  {"name": "画面外から登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.5", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "角度", "value": "90.0", "type": "normal", "min": "-360.0", "max": "360.0"}, {"name": "数", "value": "1", "type": "normal", "min": "1", "max": "16"}, {"name": "ランダム方向", "value": "0", "type": "check"}], "code": "obj.effect(\"画面外から登場\",\"時間\",0.5,\"角度\",90.0,\"数\",1,\"ランダム方向\",0)"}, 
+  {"name": "ランダム方向から登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "1.5", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "回転", "value": "3.0", "type": "normal", "min": "0.0", "max": "10.0"}, {"name": "ライト", "value": "30.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "加減速", "value": "1", "type": "check"}], "code": "obj.effect(\"ランダム方向から登場\",\"時間\",1.5,\"回転\",3.0,\"ライト\",30.0,\"加減速\",1)"}, 
+  {"name": "拡大縮小して登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.3", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "拡大率", "value": "300.0", "type": "normal", "min": "0.0", "max": "800.0"}, {"name": "加減速", "value": "1", "type": "check"}], "code": "obj.effect(\"拡大縮小して登場\",\"時間\",0.3,\"拡大率\",300.0,\"加減速\",1)"}, 
+  {"name": "ランダム間隔で落ちながら登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.5", "type": "normal", "min": "-0.5", "max": "5.0"}, {"name": "間隔", "value": "1.0", "type": "normal", "min": "0.0", "max": "5.0"}, {"name": "距離", "value": "400.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "加減速", "value": "1", "type": "check"}], "code": "obj.effect(\"ランダム間隔で落ちながら登場\",\"時間\",0.5,\"間隔\",1.0,\"距離\",400.0,\"加減速\",1)"}, 
+  {"name": "弾んで登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "2.0", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "高さ", "value": "200.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "回数", "value": "4.0", "type": "normal", "min": "1.0", "max": "20.0"}], "code": "obj.effect(\"弾んで登場\",\"時間\",2.0,\"高さ\",200.0,\"回数\",4.0)"}, 
+  {"name": "広がって登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.3", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "縦方向", "value": "0", "type": "check"}], "code": "obj.effect(\"広がって登場\",\"時間\",0.3,\"縦方向\",0)"}, 
+  {"name": "起き上がって登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.6", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "勢い", "value": "2.0", "type": "normal", "min": "0.0", "max": "8.0"}], "code": "obj.effect(\"起き上がって登場\",\"時間\",0.6,\"勢い\",2.0)"}, 
+  {"name": "何処からともなく登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "0.3", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "ぼかし", "value": "1.0", "type": "normal", "min": "0.0", "max": "5.0"}, {"name": "位置", "value": "1.5", "type": "normal", "min": "0.0", "max": "5.0"}], "code": "obj.effect(\"何処からともなく登場\",\"時間\",0.3,\"ぼかし\",1.0,\"位置\",1.5)"}, 
+  {"name": "点滅して登場", "category": "切り替え効果", "params": [{"name": "時間", "value": "1.0", "type": "normal", "min": "-5.0", "max": "5.0"}, {"name": "点滅間隔", "value": "1", "type": "normal", "min": "1", "max": "5"}, {"name": "点滅間隔を一定にする", "value": "0", "type": "check"}], "code": "obj.effect(\"点滅して登場\",\"時間\",1.0,\"点滅間隔\",1,\"点滅間隔を一定にする\",0)"}, 
+
+  // === アニメーション効果カテゴリー ===
+  {"name": "振動", "category": "アニメーション効果", "params": [{"name": "X", "value": "10", "type": "normal", "min": "-500", "max": "500"}, {"name": "Y", "value": "10", "type": "normal", "min": "-500", "max": "500"}, {"name": "Z", "value": "0", "type": "normal", "min": "-500", "max": "500"}, {"name": "周期", "value": "1", "type": "normal", "min": "1", "max": "100"}, {"name": "ランダムに強さを変える", "value": "1", "type": "check"}, {"name": "複雑に振動", "value": "0", "type": "check"}], "code": "obj.effect(\"振動\",\"X\",10,\"Y\",10,\"Z\",0,\"周期\",1,\"ランダムに強さを変える\",1,\"複雑に振動\",0)"}, 
+  {"name": "スクリプト制御", "category": "アニメーション効果", "params": [{"name": "スクリプト", "value": " ", "type": "value"}], "code": "obj.effect(\"スクリプト制御\")"}, 
+  {"name": "震える", "category": "アニメーション効果", "params": [{"name": "振幅", "value": "5.0", "type": "normal", "min": "0.0", "max": "500.0"}, {"name": "角度", "value": "10.0", "type": "normal", "min": "0.0", "max": "180.0"}, {"name": "間隔", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}], "code": "obj.effect(\"震える\",\"振幅\",5.0,\"角度\",10.0,\"間隔\",0.0)"}, 
+  {"name": "振り子", "category": "アニメーション効果", "params": [{"name": "速さ", "value": "2.0", "type": "normal", "min": "0.0", "max": "10.0"}, {"name": "角度", "value": "30.0", "type": "normal", "min": "0.0", "max": "180.0"}, {"name": "ずらし", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}], "code": "obj.effect(\"振り子\",\"速さ\",2.0,\"角度\",30.0,\"ずらし\",0.0)"}, 
+  {"name": "弾む", "category": "アニメーション効果", "params": [{"name": "速さ", "value": "20.0", "type": "normal", "min": "0.1", "max": "100.0"}, {"name": "高さ", "value": "150.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "角度", "value": "0.0", "type": "normal", "min": "0.0", "max": "360.0"}, {"name": "ずらし", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}], "code": "obj.effect(\"弾む\",\"速さ\",20.0,\"高さ\",150.0,\"角度\",0.0,\"ずらし\",0.0)"}, 
+  {"name": "反復移動", "category": "アニメーション効果", "params": [{"name": "速さ", "value": "20.0", "type": "normal", "min": "0.1", "max": "100.0"}, {"name": "距離", "value": "100.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "角度", "value": "0.0", "type": "normal", "min": "0.0", "max": "360.0"}, {"name": "ずらし", "value": "0.0", "type": "normal", "min": "0.0", "max": "100.0"}], "code": "obj.effect(\"反復移動\",\"速さ\",20.0,\"距離\",100.0,\"角度\",0.0,\"ずらし\",0.0)"}, 
+  {"name": "砕け散る", "category": "アニメーション効果", "params": [{"name": "開始時間", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "再生速度", "value": "1.00", "type": "normal", "min": "-10.00", "max": "10.00"}, {"name": "中心X", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Y", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "中心Z", "value": "0.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "破片サイズ", "value": "50.0", "type": "normal", "min": "5.0", "max": "1000.0"}, {"name": "速度", "value": "100.0", "type": "normal", "min": "-5000.0", "max": "5000.0"}, {"name": "重力", "value": "100.0", "type": "normal", "min": "0.0", "max": "1000.0"}, {"name": "時間差", "value": "100.0", "type": "normal", "min": "-1000.0", "max": "1000.0"}, {"name": "距離影響", "value": "100.0", "type": "normal", "min": "0.0", "max": "5000.0"}, {"name": "ランダム回転", "value": "100.0", "type": "normal", "min": "0.0", "max": "5000.0"}, {"name": "ランダム方向", "value": "100.0", "type": "normal", "min": "0.0", "max": "5000.0"}], "code": "obj.effect(\"砕け散る\",\"開始時間\",0.00,\"再生速度\",1.00,\"中心X\",0.0,\"中心Y\",0.0,\"中心Z\",0.0,\"破片サイズ\",50.0,\"速度\",100.0,\"重力\",100.0,\"時間差\",100.0,\"距離影響\",100.0,\"ランダム回転\",100.0,\"ランダム方向\",100.0)"}, 
+  {"name": "点滅", "category": "アニメーション効果", "params": [{"name": "速さ", "value": "1.00", "type": "normal", "min": "0.00", "max": "15.00"}, {"name": "点滅割合", "value": "50.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "点灯速度", "value": "100.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "消灯速度", "value": "75.0", "type": "normal", "min": "0.0", "max": "100.0"}], "code": "obj.effect(\"点滅\",\"速さ\",1.00,\"点滅割合\",50.0,\"点灯速度\",100.0,\"消灯速度\",75.0)"}, 
+  {"name": "リール回転", "category": "アニメーション効果", "params": [{"name": "回転数", "value": "0", "type": "normal", "min": "-50", "max": "50"}, {"name": "ブラー", "value": "100.0", "type": "normal", "min": "0.0", "max": "200.0"}, {"name": "横回転", "value": "0", "type": "check"}], "code": "obj.effect(\"リール回転\",\"回転数\",0,\"ブラー\",100.0,\"横回転\",0)"}, 
+  {"name": "粒子化", "category": "アニメーション効果", "params": [{"name": "開始時間", "value": "0.00", "type": "normal", "min": "-100.00", "max": "100.00"}, {"name": "再生速度", "value": "1.00", "type": "normal", "min": "-10.00", "max": "10.00"}, {"name": "起点X", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "起点Y", "value": "0.0", "type": "normal", "min": "-2000.0", "max": "2000.0"}, {"name": "速度", "value": "20.0", "type": "normal", "min": "0.0", "max": "100.0"}, {"name": "角度", "value": "0.0", "type": "normal", "min": "-360.0", "max": "360.0"}, {"name": "粒子速度", "value": "1.00", "type": "normal", "min": "0.00", "max": "10.00"}, {"name": "拡大速度", "value": "1.00", "type": "normal", "min": "0.00", "max": "10.00"}, {"name": "ゆらぎ", "value": "100", "type": "normal", "min": "0", "max": "500"}, {"name": "ゆがみ", "value": "100", "type": "normal", "min": "0", "max": "500"}, {"name": "ぼかし", "value": "10", "type": "normal", "min": "0", "max": "100"}], "code": "obj.effect(\"粒子化\",\"開始時間\",0.00,\"再生速度\",1.00,\"起点X\",0.0,\"起点Y\",0.0,\"速度\",20.0,\"角度\",0.0,\"粒子速度\",1.00,\"拡大速度\",1.00,\"ゆらぎ\",100,\"ゆがみ\",100,\"ぼかし\",10)"}, 
+
+  // === カメラ制御カテゴリー ===
+  {"name": "材質設定(カメラ制御)", "category": "カメラ制御", "params": [{"name": "光沢度", "value": "70", "type": "normal", "min": "0", "max": "100"}], "code": "obj.effect(\"材質設定(カメラ制御)\",\"光沢度\",70)"}, 
+  {"name": "カメラ制御オプション", "category": "カメラ制御", "params": [{"name": "オブジェクトの向き", "value": "標準", "type": "select", "options": "標準,カメラの方向を向く(横方向のみ),カメラの方向を向く(縦横方向のみ),カメラの方向を向く"}, {"name": "裏面を表示しない", "value": "0", "type": "check"}], "code": "obj.effect(\"カメラ制御オプション\",\"オブジェクトの向き\",\"標準\",\"裏面を表示しない\",0)"}, 
+
+  // === 基本効果カテゴリー ===
+  {"name": "座標", "category": "基本効果", "params": [{"name": "X", "value": "0.00", "type": "normal", "min": "-100000.00", "max": "100000.00"}, {"name": "Y", "value": "0.00", "type": "normal", "min": "-100000.00", "max": "100000.00"}, {"name": "Z", "value": "0.00", "type": "normal", "min": "-100000.00", "max": "100000.00"}], "code": "obj.effect(\"座標\",\"X\",0.00,\"Y\",0.00,\"Z\",0.00)"}, 
+  {"name": "拡大率", "category": "基本効果", "params": [{"name": "拡大率", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "X", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "Y", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}, {"name": "Z", "value": "100.000", "type": "normal", "min": "0.000", "max": "10000.000"}], "code": "obj.effect(\"拡大率\",\"拡大率\",100.000,\"X\",100.000,\"Y\",100.000,\"Z\",100.000)"}, 
+  {"name": "透明度", "category": "基本効果", "params": [{"name": "透明度", "value": "0.00", "type": "normal", "min": "0.00", "max": "100.00"}], "code": "obj.effect(\"透明度\",\"透明度\",0.00)"}, 
+  {"name": "回転", "category": "基本効果", "params": [{"name": "X", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "Y", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "Z", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}], "code": "obj.effect(\"回転\",\"X\",0.00,\"Y\",0.00,\"Z\",0.00)"}, 
+  {"name": "領域拡張", "category": "基本効果", "params": [{"name": "上", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "下", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "左", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "右", "value": "0", "type": "normal", "min": "0", "max": "4000"}, {"name": "塗りつぶし", "value": "0", "type": "check"}], "code": "obj.effect(\"領域拡張\",\"上\",0,\"下\",0,\"左\",0,\"右\",0,\"塗りつぶし\",0)"}, 
+  {"name": "ローテーション", "category": "基本効果", "params": [{"name": "90度回転", "value": "0", "type": "normal", "min": "-4", "max": "4"}], "code": "obj.effect(\"ローテーション\",\"90度回転\",0)"}, 
+  {"name": "反転", "category": "基本効果", "params": [{"name": "上下反転", "value": "0", "type": "check"}, {"name": "左右反転", "value": "0", "type": "check"}, {"name": "輝度反転", "value": "0", "type": "check"}, {"name": "色相反転", "value": "0", "type": "check"}, {"name": "透明度反転", "value": "0", "type": "check"}], "code": "obj.effect(\"反転\",\"上下反転\",0,\"左右反転\",0,\"輝度反転\",0,\"色相反転\",0,\"透明度反転\",0)"}
+];
+
+const app=document.getElementById("app");
+const sel=document.getElementById("categorySelect");
+
+// 重複のない順序付きカテゴリー生成
+[...new Set(effects.map(e=>e.category))].forEach(c=>{
+ let o=document.createElement("option");
+ o.value=c;
+ o.textContent=c;
+ sel.appendChild(o);
+});
+
+function render(){
+ let kw=document.getElementById("searchBox").value;
+ let cat=sel.value;
+ app.innerHTML="";
+ effects.forEach(e=>{
+  if(kw && !e.name.includes(kw))return;
+  if(cat && e.category!==cat)return;
+
+  let html="";
+  e.params.forEach(p=>{
+    let cls=`type-${p.type}`;
+    let metaLabel="";
+    
+    // 各パラメータタイプ固有の表示方法に条件分岐
+    if(p.type === "normal") {
+      metaLabel = `<small>min:${p.min!==undefined?p.min:"?"} / max:${p.max!==undefined?p.max:"?"}</small>`;
+    } else if(p.type === "select") {
+      metaLabel = `<small>options:[${p.options||"?"}]</small>`;
+    } else {
+      metaLabel = `<small>type: ${p.type}</small>`;
+    }
+
+    html+=`<div class="param-row ${cls}">
+      ${p.name} = ${p.value !== "" ? p.value : '""'} <br>
+      ${metaLabel}
+    </div>`;
+  });
+
+  let d=document.createElement("div");
+  d.className="card";
+  d.innerHTML=`
+    <h2>${e.name}</h2>
+    <div>カテゴリ: ${e.category}</div>
+    <div class="params">${html || '<div style="color:#666;">パラメータなし</div>'}</div>
+    <div style="position:relative;"><pre>${e.code}</pre><button class="copy-btn" onclick="copyText(this)">コピー</button></div>
+  `;
+  app.appendChild(d);
+ });
+}
+
+document.getElementById("searchBox").addEventListener("input",render);
+sel.addEventListener("change",render);
+render();
+</script>
+</body>
+</html>
