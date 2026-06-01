@@ -230,23 +230,6 @@ function copyText(btn){
  }
 }
 
-function copyText(btn){
-  const code = btn.previousElementSibling.innerText;
- if (pre && pre.tagName === "PRE") {
-  let text = pre.innerText;
-  navigator.clipboard.writeText(text).then(() => {
-   btn.innerText="コピー済";
-   btn.style.background="#388E3C";
-   setTimeout(()=>{
-    btn.innerText="コピー";
-    btn.style.background="#4CAF50";
-   },1000);
-  }).catch(err => {
-   console.error("コピーに失敗しました: ", err);
-  });
- }
-}
-
 const effects = [
   // === 色調整カテゴリー ===
   {"name": "色調補正", "category": "色調整", "params": [{"name": "明るさ", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "コントラスト", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "色相", "value": "0.00", "type": "normal", "min": "-3600.00", "max": "3600.00"}, {"name": "輝度", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "彩度", "value": "100.00", "type": "normal", "min": "0.00", "max": "200.00"}, {"name": "飽和する", "value": "1", "type": "check"}], "code": "obj.effect(\"色調補正\",\"明るさ\",100.00,\"コントラスト\",100.00,\"色相\",0.00,\"輝度\",100.00,\"彩度\",100.00,\"飽和する\",1)"}, 
