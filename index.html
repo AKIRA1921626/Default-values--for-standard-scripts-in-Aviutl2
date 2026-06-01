@@ -214,20 +214,56 @@ AIに頼って作成しました。<br/><br/>
 </div>
 <script>
 function copyText(btn){
- const pre = btn.previousElementSibling;
- if (pre && pre.tagName === "PRE") {
-  let text = pre.innerText;
-  navigator.clipboard.writeText(text).then(() => {
-   btn.innerText="コピー済";
-   btn.style.background="#388E3C";
-   setTimeout(()=>{
-    btn.innerText="コピー";
-    btn.style.background="#4CAF50";
-   },1000);
-  }).catch(err => {
-   console.error("コピーに失敗しました: ", err);
-  });
- }
+  const code = btn.previousElementSibling.innerText;
+  
+  // 安全なコンテキスト（HTTPS等）で標準APIが利用可能な場合
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(() => {
+      handleCopySuccess(btn);
+    }).catch(err => {
+      console.error('Clipboard API fail, fallback to execCommand:', err);
+      fallbackCopyText(code, btn);
+    });
+  } else {
+    // 互換モード（HTTP環境や非対応ブラウザ用）
+    fallbackCopyText(code, btn);
+  }
+}
+
+// 互換性を担保する古いコピー方式（ダミーのテキストエリアを使用）
+function fallbackCopyText(text, btn) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  
+  // 画面の外側に配置してユーザーに見えないようにする
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  textArea.style.top = "-999999px";
+  document.body.appendChild(textArea);
+  
+  textArea.focus();
+  textArea.select();
+  
+  try {
+    const successful = document.execCommand('copy');
+    if (successful) {
+      handleCopySuccess(btn);
+    } else {
+      alert('コピーに失敗しました。お使いのブラウザ環境の制限です。');
+    }
+  } catch (err) {
+    console.error('Fallback copy failed:', err);
+  }
+  
+  document.body.removeChild(textArea);
+}
+
+// コピー成功時のテキスト書き換え共通ロジック
+function handleCopySuccess(btn) {
+  btn.textContent = "コピー完了";
+  setTimeout(() => {
+    btn.textContent = "コピー";
+  }, 1500);
 }
 
 const effects = [
