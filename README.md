@@ -1,4 +1,4 @@
-# Default-values--for-standard-scripts-in-Aviutl2
+# Defaultvalues--for-standard-scripts-in-Aviutl2
 Aviutl2の標準スクリプトの初期値をまとめたページ  
 
 URLは下記となります。  
